@@ -5,6 +5,7 @@ import userModel from "./models/userModel";
 
 // ajax interception
 import "./config";
+import "../styles/less.less";
 
 const app = dva({
   onAction: createLogger()

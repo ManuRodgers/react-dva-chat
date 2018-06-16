@@ -3,40 +3,12 @@ const path = require("path");
 const fs = require("fs");
 const parseurl = require("parseurl");
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/car");
+mongoose.connect("mongodb://127.0.0.1:27017/user");
 const app = express();
 
-
-// car router
-const carRouter = require("./routes/carRouter");
-app.use("/cars", carRouter);
-
-app.get("/api", (req, res) => {
-  let returnJSON = {};
-
-  fs.readdir(path.resolve(__dirname, "../src/images/Corolla/"), (err, data) => {
-    if (err) {
-      console.error(err);
-    } else {
-      data.forEach(color => {
-        returnJSON[color] = {};
-
-        let colorData = fs.readdirSync(
-          path.resolve(__dirname, "../src/images/Corolla/" + color)
-        );
-        colorData.forEach(album => {
-          let albumData = fs.readdirSync(
-            path.resolve(__dirname, `../src/images/Corolla/${color}/${album}`)
-          );
-
-          returnJSON[color][album] = albumData;
-        });
-      });
-    }
-
-    return res.json({ results: returnJSON });
-  });
-});
+// user router
+const userRoutes = require("./routes/userRouter");
+app.use("/user", userRoutes);
 
 // static
 app.use(express.static(path.resolve(__dirname, "../src")));

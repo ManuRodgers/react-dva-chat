@@ -20,10 +20,7 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["env", "react", "stage-2"],
-            plugins: [
-              "transform-runtime",
-              "transform-es2015-template-literals",              
-            ]
+            plugins: ["transform-runtime", "transform-es2015-template-literals"]
           }
         }
       },
@@ -38,6 +35,17 @@ module.exports = {
           },
           {
             loader: "less-loader" // compiles Less to CSS
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              emitFile: false
+            }
           }
         ]
       }
